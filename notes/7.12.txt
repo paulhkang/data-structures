@@ -1,0 +1,173 @@
+README:
+list the files you're submitting, and what their purposes are.
+
+
+
+
+
+reverse polish notation
+	post fix expressions
+		enter operands first, followed by the operator
+		3 5 +
+	
+	you can nest entire expressions as operands
+		3 5 + 2 *
+		--> (3+5)*2		in fix expression
+
+		3 5 2 + *
+		--> 3 * (5+2) = 21
+
+	
+	come up with an algorithm that evalutes these expressions
+	this is a stack algorithm
+
+	load the operands onto the stack. when you hit an operator, pop the stack and set that value as the right operator, and pop again and set that value as the left operator.
+						push the result back onto the stack.
+
+					repeat, until you run out of operators.
+					when you run out of operators, you should have one element in the stack. pop the stack, and that's your answer.
+
+		**note: if you have to pop an empty stack, you have an underflow (not enough operands for operators)
+			if you still have stuff after you've popped the answer, then you have too many operands for your operators.
+
+
+
+
+
+
+
+
+another data structure: QUEUE
+	can be realized from lists or arrays
+	often referred to as FIFO: first in, first out
+
+	much like a stack, should have methods:
+		size, isEmpty/isFull, enqueue, dequeue
+					add	remove
+
+	
+	when thinking about how to get enqueue and dequeue operations as fast as possible,
+		add first element to address 0
+		add second element to address 1.
+		add third element to address 2.
+		...
+
+		the head points to the first element.
+		the tail points to the last element, and when enqueueing, add the element to the next location after the tail.
+
+		when dequeueing, move the head to point to the next location after the tail, and remove the data point that it was initially pointing to.
+
+
+		however, this could eventually end up with you wasting all of the space.
+		this problem is fixable, if you wrap the array.
+			this can be done using the mod operator. for an array with elements 0-9 (size 10), increment tail, then mod it by 10.
+									this is harmless if you don't need to wrap, and also fixes your problem if you do need to wrap.
+
+								similarly, when incrementing head to dequeue, increment head and mod it by the size of the array.
+
+			before enqueueing, check if the array is full.
+			do this by making a separate variable that keeps track of the number of elements.
+				if trying to enqueue, ensure that the number of elements < the size of the array.
+
+			
+		problem of people in a circle
+			N people in a circle, count to k, that person who is on k leaves circle, repeat until winner.
+			the circle is a queue.
+			for each iteration, dequeue that element, then re-enqueue that element. when you hit k, don't re-enqueue the element.
+
+
+
+		NOTE: in the LinkedList class, remove() removes from the head, and add() adds to the end.
+			LinkedList is a queue!
+			but, it also has push() and pop(), which let you use it as a stack.
+
+
+		NOTE: offer(e) and poll() can be used interchangeably with enqueue and dequeue.
+
+
+
+
+
+
+
+
+
+
+TREES
+	nodes that have no children are leaves
+	nodes that are not leaves are referred to as interior nodes
+	the path of the tree is the set of edges that we follow to get from one node to another node
+
+
+	depth of a node
+		length of the unique path back to the root
+
+
+	height of a node
+		length of the path from a node to the furthest leaf
+
+
+
+
+	class TreeNode<E>
+	{
+		E data;
+		TreeNode<E> nextSibling;
+		TreeNode<E> firstChild;
+	}
+
+
+
+
+
+	Binary tree - all nodes have either 2 children or are leaves
+	complete binary tree - ???
+	perfect binary tree - ???
+
+
+	expression tree
+		takes a mathematical expression and represents it in the form of a tree
+		you are either an operator with 2 children, or an operand with no children (assuming binary operators only)
+		if you have an operator, its left subtree corresponds to its left operand, its right subtree corresponds to its right operand
+
+
+	int eval(ETNODE t)
+	{
+		if(t.isOperand)
+			return t.value;
+		int lval = eval(t.left);
+		int rval = eval(t.right);
+
+		return apply(t.operator, lval, rval);				// takes in a char (operator) and 2 ints, and adds, subtracts, etc. as necessary
+	}
+
+		performing a post order traversal on an expression tree gives you a post order expression
+				pre order					    pre order
+
+
+	inorder traversal --> recurse to the left, print the node itself, then recurse to the right (infix??)
+
+
+	
+	constructor for your expressionTree class will take in a postfix expression, and creates a valid corresponding expression tree
+		the algorithm to do this is the one we saw to evaluate a postfix expression, with one minor change:
+			e.g. 4 3 2 + *
+
+			an expression tree is built out of expression tree nodes, so an expressionTree class will have one instance variable: the root node
+			the stack is a stack of expression tree nodes
+			each token ultimately becomes a node in the expression tree
+
+		when evaluating postfix expressions, pop to right operator, pop to left operator, apply operator
+		now, instead of applying operator, create a subtree, with the operator as the parent and the operands as the children
+			then, push the operator onto the stack (the child nodes of the operator came along for the ride, kind of implicitly paired with the operator)
+			repeat.
+			** when you pop an operator subtree off the stack, you pop off the entire subtree with it.
+				then, of course, you create a bigger subtree using the small subtree and the other operand.
+			at the end, pop the stack. the result should be the root of the expression tree.
+			**check to make sure that the stack is empty after you pop the root.
+ 
+
+
+
+	
+

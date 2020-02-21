@@ -1,0 +1,123 @@
+1. Weiss, 4.6
+
+A full node is a node with 2 children. Prove that the number of full nodes plus one is equal to the number of leaves in a nonempty binary tree.
+
+Base cases:
+	For a non-empty binary tree,
+	Say F = number of full nodes
+	    L = number of leaves
+
+	For F = 0, L = 1. (F = 0 implies that the tree is essentially a straight line of nodes, each with one child, until the (single) leaf.)
+	For F = 1, L = 2. (Take the tree from F = 0, and create one other subtree anywhere in the tree. This subtree is also a straight line of nodes,
+				with one leaf. Therefore, the total amount of leaves is 2.)
+	...
+
+
+Assume that these hold true for all values of F from 0 <= F <= k, resulting in the inductive hypothesis:
+	For F = k, L = k + 1.
+
+Now, the statement to be proved is that for F = k + 1, L = k + 2.
+	Given the inductive hypothesis, it follows that for F = k + 1, L = (k + 1) + 1 = k + 2.
+
+
+
+
+
+
+
+
+
+2. Weiss, 4.9
+
+a. (see pdf)
+
+b. (see pdf)
+
+
+
+
+
+
+
+
+
+3. (see pdf)
+
+
+
+
+
+
+
+4. 
+
+Proof by counterexample.
+
+Assume that a preorder and postorder traversal alone are enough to represent a unique tree.
+
+Here is an example that disproves the assumption:
+2 distinct trees that result in the same preorder and postorder traversals.
+
+preorder:	a	b	c	d
+postorder:	d	c	b	a
+
+
+
+				a							a
+					b							b
+				c									c
+			d											d
+
+
+
+
+
+5.
+
+The BinaryNode class would need to have a new boolean instance variable, which indicates whether the node is "deleted" or not.
+	e.g. Call the boolean isDeleted. Have the lazy deletion method set isDeleted to true when the node is deleted, and false otherwise.
+
+private static boolean isDeleted;
+
+
+
+
+
+You would also need a check() method to return the value of isDeleted.
+
+private boolean check()
+{
+	return isDeleted;
+}
+
+
+
+
+
+
+The new findMin uses the check() method.
+
+private BinaryNode<AnyType> findMin(BinaryNode<AnyType> t)
+{
+	if(t == null)
+		return null;
+	else if(t.left == null)
+		if(t.check() == false)			// if t.left == null but t is not deleted, return t
+			return t;
+		else if(t.right != null)		// if t.left == null AND t.isDeleted == true, then go right
+			return findMin(t.right);
+		else					// if you're at this point and there's no right subtree, return null
+			return null;
+	else if(findMin(t.left) != null)		// check if findMin(t.left) is null before you return it, so you don't get stuck returning null
+		return findMin(t.left);			// when you don't have to
+	else						// if findMin(t.left) == null, then just return t, and don't bother going left
+		return t;
+	
+}
+
+
+
+
+
+
+

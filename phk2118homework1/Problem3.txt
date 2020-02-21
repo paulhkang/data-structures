@@ -1,0 +1,60 @@
+Fragment 1:
+n = 1000000
+time (ms) = 235-245
+
+n = 2000000
+time (ms) = 470-480
+
+n = 4000000
+time (ms) = 945-955
+
+The running time seems to double as the input doubles, which matches the O(N) behavior that I predicted.
+
+
+
+
+Fragment 2:
+n = 10000
+time (ms) = 515-520
+
+n = 20000
+time (ms) = ~2060
+
+n = 40000
+time (ms) = ~8242
+
+The running time seems to quadruple as input doubles, and 16x as input increases by 4x.
+This matches the O(N^2) behavior that I predicted.
+
+
+
+
+
+
+Fragment 3:
+n = 10000
+time (ns) = ~30000-45000
+
+n = 20000
+time (ns) = ~40000
+
+n = 40000
+time (ns) = ~40000-50000
+
+
+
+
+n = 10000000
+time (ns) = ~50000-55000 (every once in a while ~70000)
+
+n = 20000000
+time (ns) = ~50000
+
+
+This algorithm seems to be extremely efficient. It is much more efficient than the O(N) behavior that I predicted.
+	Even as n goes to 10^7 values, its running time stays relatively constant. I'd conclude that this algorithm isn't constant, but may be logN.
+
+One issue that came up with testing this algorithm (as found by another student on Piazza) is that I needed to use System.nanoTime(), because
+	milliseconds were not small enough to measure this algorithm's speed. The nanosecond running times occasionally fluctuated to outlier
+	values, but usually stayed within a relatively tight range.
+

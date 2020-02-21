@@ -1,0 +1,110 @@
+Quadratic probing hash table
+
+We have our constructor, let's do the insert method.
+
+	We need a method that's going to find a location at which we should be inserting.
+		
+		findPos( AnyType x) does this
+		within the while loop: {offset += 2;}		???
+
+	
+	then check, is the current position active?
+		isActive( int a ) shows whether the value at that position has been lazily deleted (false) or not (true)
+		
+		if the current position is active, return insert() as false
+
+
+	moving on, if the current position is null, then we want to insert.
+		increment occupied.
+
+	create new HashEntry<>() at array[ currentPosition ], and also increment theSize.
+
+
+
+
+
+
+rehash()
+	allocates new array to a new size, which is the next prime after twice the size of the old array
+	
+	copies the old table over.
+
+
+
+
+remove( AnyType x )
+	use findPos() to find where it should be
+	set isActive( currentPos ) to false			(lazy deletion)
+		and do other shit
+
+
+
+
+
+contains( AnyType x )
+	checks to see whether the hash table contains the specified value.
+		
+		
+
+
+
+
+myhash( AnyType x)
+	hashes x, mods it by table size, makes sure the result isnt negative.
+
+
+
+
+
+
+-- ^^^ this covers up to chapter 5.5 ^^^ --
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Chapter 6: Priority Queues
+
+	STUFF
+
+
+
+
+
+
+
+
+
+
+
+
+-- BinaryHeap.java --
+insert()
+	looking at the for loop: array[0] is used as temporary storage. (put x into array[0]).
+
+
+
+
+
+percolateDown()
+	make child the left child. (to begin with)
+
+
+
+
+
+
+
+
+
+
+Finished chapter 6, begin with chapter 7

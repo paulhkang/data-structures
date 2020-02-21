@@ -1,0 +1,139 @@
+Probing
+
+I need a sequence of locations at which i can try to insert the value x
+
+	First, try taking the hash function and modding by the table size (probe h0)
+	If that doesn't work, try a second thing (probe h1)
+
+	We need some sort of equation to give us these probes
+
+	h_i(x) = (hash(x) + f(i)) % TS 					(TS = table size)
+		f(i) = probing function
+
+
+
+
+** You want to have prime table sizes
+
+
+
+
+
+Linear probing
+	The probing function is linear
+
+	Starts with original location (hash(x) % TS), moves one over
+		Repeats through whole hash table until an empty space is found
+	
+	f(i) = i
+
+
+	Using hash(x) = x; TS = 10 (BAD TS!! IT ISN'T PRIME)
+		Inserting 68, 19, 39, 10, 28, in that order
+		Generates:
+
+
+
+	0	1	2	3	4	5	6	7	8	9
+	39	10	28						68	19
+
+
+
+	Primary clustering occurs here, e.g. when you add 28 (28 would be in 8 in an empty array, but it is forced into 2)
+	Primary clustering - One collision greats a cluster of data points; other collisions will grow the cluster
+		BAD
+
+
+
+
+	
+With a hash function, we want to be able to:
+		Insert keys
+		contains() check
+		Remove keys
+
+
+
+	contains() check --> Is 10 in the hash table?
+		Follow the h_i's.
+		We discover that location 0 is filled, but not with 10. go to h1.
+		Is the 10 in h1 (location 1)? Yes.
+
+
+		--> Is 20 in the table?
+		Follow the probes again.
+		location 0 is filled, but not 20. go to h1.
+		location 1 is filled, but not 20. go to h2.
+		location 2 is filled, but not 20. go to h3.
+		location 3 is empty. stop. 20 isn't here.
+			this step could be a problem. landing on an empty cell is not necessarily an indicator that we should stop probing.
+			removing keys could create a problem if landing on an empty cell indicates to stop probing. (--> be careful when removing)
+
+
+
+
+
+lazy deletion - marking an element as having been deleted, but don't actually remove it
+	this is more useful when probing a hash table
+	instead of deleting 10, do lazy deletion on 10.
+		when probing, do a quick test at the beginning to see whether 10 is marked valid or invalid.
+		when re-inserting 10, change its state from invalid to valid.
+
+
+
+
+
+
+
+
+Quadratic probing
+	f(i) = i^2
+
+		--> h_i(x) stays the same: 		h_i(x) = (hash(x) + f(i)) % TS
+
+
+	68, 19, 39, 10, 28
+
+
+	0	1	2	3	4	5	6	7	8	9
+	39	10	28						68	19
+
+	Admittedly, 28 is at the same spot that we would've landed at before.
+		But, it took fewer probes to get there.
+
+	Now, add 18.
+
+	0	1	2	3	4	5	6	7	8	9
+	39	10	28					18	68	19
+
+	Way further up, because (index 8) + 9 = (index 7).
+
+
+	keep load factor below a half. (???)
+		we'll never have to do more than 50% of the probes before we find an empty space.
+
+		load factor = currentSize / theLists.length
+
+
+
+
+
+
+0 <= i, j < TS/2		i != j, TS is prime
+Proof by contradiction.
+	Assume that there are 2 distinct probes i and j that DO land on the same spot. Prove that this assumption contradicts the base assumptions.
+
+	hash(x) + i^2 = hash(x) + j^2		(mod both sides by TS)
+	i^2 = j^2				(mod TS)
+	i^2 - j^2 = 0				(mod TS)
+	(i-j)(i+j) = 0				(mod TS)
+		i-j is NEVER 0.
+		i+j could become 0 if i+j = TS. BUT i,j < TS/2, therefore they cannot add up to the table size.
+		(i-j)(i+j) could become the table size or some multiple of the table size (and therefore equal 0). BUT TS is prime, therefore nah.
+
+
+	You won't have to replicate this proof, but be somewhat familiar with it anyway.
+
+
+
+

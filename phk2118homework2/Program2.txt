@@ -1,0 +1,10 @@
+Enqueue:
+
+The big-O running time is O(1), because it is pushing onto a stack built from a linked list. Because the push()
+method pushes onto the front of the list, it is an O(1) operation, and the enqueue is simply a push onto the stack.
+
+
+Dequeue:
+
+The big-O running time is O(N), because in the worst case scenario, stack 2 is full (with N objects).
+In this case, popping the stack N times would be an O(N) operation.

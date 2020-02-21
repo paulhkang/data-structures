@@ -1,0 +1,95 @@
+dictionary has only correctly spelled words in it
+
+you generate a potential correction for
+
+how do i (in order 1 time) verify if the suggestion is a valid word or not?
+
+
+
+
+
+
+
+
+
+chapter 1 - entire
+	proof by induction (strong induction)	--							problem 1
+	proof by counterexample
+	recursion, rules of recursion	--								problem (making something recursive)
+	(generics)
+	static, nested, inner classes (also in terms of iterators)
+
+chapter 2 - entire
+	big-o notation, big-theta, big-omega	--							problem
+	relative speeds of common runtimes
+		runtime from analyzing code
+
+chapter 3 - entire
+	list ADT including typical list operations
+	running times for various operations
+	linkedlist (double and single), runtimes
+		sentinel nodes
+		how iterators work
+	building stacks, various operations
+		balancing, evaluating postfix expressions, palindromes, etc
+	queue ADT, operations and uses
+
+chapter 4 - through 4.4, quick skim of 4.6, skim 4.8 to know what sets and maps are
+	first child, next siblings
+	AVL trees and rotations	--									problem
+	expression trees, stack-based algorithms for building them
+	binary search trees, costs, implementation
+		if it's not a balanced bst, a lot of costs are O(N) not O(logN)
+	lazy deletion vs full deletion
+	perfect, complete, full binary tree	--							know this shit
+
+chapter 5 - through 5.5, peek at 5.6 (hash tables in standard library)
+	what hashing is
+	what a hashtable is
+	load factor
+	various collision resolution strategies
+		separate chaining (lambda < 1)
+		probing (linear, quadratic), maybe double hashing
+		inserts on a hash table using one or more collision strategies	--			very possible!!
+		rehashing a table
+		lazy deletion
+		
+
+chapter 6 - through 6.3
+	priority queue, how it's implemented with binary heap
+	array-based implementation	--								programming problem
+	heap-order condition
+	min heap vs max heap
+	binary heap is a complete tree!
+	percolate up and down
+		how to deal with buildHeap operation
+	using heap to perform sorting in O(N log N)
+
+chapter 7 - through 7.7 (7.7.4), skipped 7.4!, skim 7.3 if u want
+	***selectionsort!!!!!!!!!!!!! (not in book)
+	insertionsort
+	analyses of both sorts (O(N^2) in worst cases)
+	some sort that's O(N log N) (didn't catch what he said)
+	quicksort
+		worst case O(N^2), average O(N log N)
+	merge and mergesort
+	**countingsort will NOT be on test, but its cool
+
+chapter 8 - know what a union and a find are on a disjoint set
+
+chapter 9 - through 9.3 (9.3.3), 9.5, 9.7
+	what graphs are, various definitions
+		directed, connected, strongly/weakly connected, etc.
+	runtime analysis of operations with mag(v) and mag(e)
+	adjacency list vs adjacency matrix
+	sparse vs dense graph
+	topological sorting, how one might perform it, what it applies to
+	something!
+		implementing this with priority queue vs linear pass through each time to find smallest
+	MST, Prim's and Kruskal's
+	P vs NP, NP-complete	--									problem
+
+
+material not in book:
+	josephus
+	tower of hanoi (exponential in cost!)

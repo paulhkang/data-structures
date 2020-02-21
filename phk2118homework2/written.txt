@@ -1,0 +1,221 @@
+1.
+
+For both problems, assume idx is the (given) index of the first node to be swapped.
+
+a. Singly linked list
+
+1. start at head node, iterate through the nodes until you get to (idx - 1).
+2. reference this node as a_prev, the next node as a, and the third node as b. 
+3. set a.next = b.next
+4. set b.next = a
+5. set a_prev.next = b
+
+
+
+
+b. Doubly linked list
+
+1. start at head node, iterate through the nodes until you get to idx.
+2. reference this node as a, and the next node as b.
+3. set a.next = b.next;
+4. set b.next = a;
+5. set b.prev = a.prev;
+6. set a.prev = b;
+
+
+
+
+
+
+
+
+
+
+
+2. Weiss, 3.8
+
+a. theSize is saved prior to the for loop because if not, the loop would re-calculate lst.size() / 2 for every iteration.
+   this is unnecessary work.
+
+
+(in parts b and c, N is the size of lst.)
+
+b. if lst is an ArrayList, the running time is O(N^2). each remove(0) is O(N), and the for loop has N/2 iterations.
+   this results in an O(N^2) running time, since constant terms can be ignored.
+
+c. if lst is a LinkedList, the running time is O(N). remove(0) is a O(1) for a LinkedList, and the for loop is still
+   executed N/2 times. this results in an O(N) running time.
+
+
+
+
+
+
+
+
+
+
+
+
+
+3. Weiss, 3.24
+
+Array:
+	int arr[arrSize];	// Array being used, assume it is an array of ints (type of array does not really matter)
+	
+Instance variables:
+	int size1 = 0;		// size of stack 1
+	int size2 = 0;		// size of stack 2
+
+Routines:
+
+Stack 1:
+
+boolean push1(int value) 
+{
+	if(size1 + size2 < arrSize)
+	{
+		for(int i = size1 - 1; i >= 0; i--)
+		{
+			arr[i+1] = arr[i];
+		}
+
+		arr[0] = value;
+
+		size1++;
+
+		return true;
+	}
+	else
+		return false;
+
+}
+
+
+int pop1()
+{
+	if(size1 > 0)
+	{
+		int current = arr[0];
+
+		for(int i = 0; i < size1; i++)
+		{
+			arr[i] = arr[i+1];
+		}
+
+		size1--;
+	
+		return current;
+	}
+	else
+		return -1;
+
+}
+
+
+boolean isEmpty1()
+{
+	if(size1 > 0)
+		return false;
+	else
+		return true;
+}
+
+
+
+
+
+Stack 2:
+
+boolean push2(int value) 
+{
+	if(size1 + size2 < arrSize)
+	{
+		for(int i = arrSize - 1; i > arrSize - size2 - 1; i--)
+		{
+			arr[i-1] = arr[i];
+		}
+
+		arr[arrSize - 1] = value;
+
+		size2++;
+
+		return true;
+	}
+	else
+		return false;
+
+}
+
+
+int pop2()
+{
+	if(size2 > 0)
+	{
+		int current = arr[arrSize - 1];
+
+		for(int i = arrSize - size2 - 1; i < arrSize - 1; i++)
+		{
+			arr[i+1] = arr[i];
+		}
+
+		size2--;
+	
+		return current;
+	}
+	else
+		return -1;
+
+}
+
+
+boolean isEmpty2()
+{
+	if(size2 > 0)
+		return false;
+	else
+		return true;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+4.
+
+a.
+
+1. Car 3 to S1
+2. Car 6 to S2
+3. Car 9 to S3
+4. Car 2 to S1
+5. Car 4 to S2
+6. Car 7 to S9
+7. Car 1 to S1
+8. Pop entire stack of S1 to output track
+9. Pop stack of S2 (only car 4) to output track
+10. Car 8 to (now empty) S1
+11. Car 5 to output track
+12. Pop stack of S2 to output track (S2 should now be empty)
+13. Pop stack of S3 (only car 7) to output track
+14. Pop stack of S1 to output track (S1 should now be empty)
+15. Pop stack of S3 to output track (S3 should now be empty)
+
+
+b.
+
+If the train is 123456789, it cannot be rearranged in increasing order using 3 holding tracks.
+
+Each holding track can only accept a value if the value to be pushed is less than the current value on top of the stack.
+If this rule is broken, the train cannot be put on the output track in increasing order from front to back,
+	because a smaller value would end up stuck under a larger value, and cars cannot be moved between holding tracks.
+
+With a train 123456789, you run out of holding tracks to store cars after car 3. Car 4 cannot be put on S1, S2, or S3, since 4 > 3,2,1.

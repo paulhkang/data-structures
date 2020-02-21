@@ -1,0 +1,295 @@
+formal definition of big-O notation:
+	T(n) = actual amount of time (units) that it takes to perform algorithm, given input of size n
+
+	T(n) = O(f(n)), where there exist some constants c, n0, where
+		T(n) <= cf(n) for all n >= n0.
+
+	**So, O(n) is an upper bound on the time cost.
+
+
+
+besides big-O, there's big-Omega (big-Om), and big-Theta (big-Th):
+
+big-Om:
+	T(n) = Om(g(n)), where there exist some constants c, n0, where
+		T(n) >= cg(n) for all n >= n0.
+
+	**So, Om(n) is a lower bound on the time cost.
+
+	e.g. the process of sorting: big-O cost is n^2.
+				     big-Om cost is nlog(n). (this has been proven)
+
+
+
+big-Th:
+	T(n) = Th(h(n)), if
+		T(n) = O(h(n))
+		   AND
+		T(n) = Om(h(n))
+	
+	**Th(n) is a tight bound.
+
+
+
+
+list of functions, from slowest to fastest growth:
+	c
+	log(n)
+	log^2(n)
+	...
+	
+	n
+	nlog(n)
+	n^2
+	n^2log(n)
+	...
+	
+	2^n
+	n!
+
+
+
+
+big-O properties:
+T1(n) = O(f(n))
+T2(n) = O(g(n))
+
+1) T1(n) + T2(n) = O(f(n) + g(n))
+
+	(if f(n) dominates g(n), then you can just drop the g(n), and vice versa)
+
+2) T1(n) * T2(n) = O(f(n)g(n))
+	
+	(something with nested loops)
+
+	e.g. with array lists, inserting an element is O(n^2) because you are calling a method that is O(n) nested inside of another method that is O(n)
+									moving all of the elements to the right			adding an element in??
+
+
+3) if T(n) is a polynomial of degree k,
+	T(n) = Th(n^k)
+
+	(this rule formalizes the rule that you can drop lower-order terms)
+
+
+4) log^k(n) = O(n)
+
+	(all log powers grow slower than n)
+
+
+
+
+
+
+
+**homework help:
+	(this is pseudo-code)
+
+	for(i= 0; i < n; i ++)
+	{	
+		for(j = i, j < n, j ++)
+		{
+			x ++;
+		}
+	}
+
+	what's the big-O cost?
+		n + n-1 + n-2 + ... = (n(n+1)) / 2 = n^2/2 + n/2
+			--> O(n^2)
+
+
+
+
+
+what about the big-O cost for the following?
+
+if(condition)
+{
+	algorithm 1;
+else
+{
+	alg 2;
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+abstract data type:
+???
+
+
+
+
+
+get familiar with the Java API, and where to find it online.
+
+
+
+
+
+
+-- collection.java --
+a collection is an abstract data type. (it is also an interface.)
+	compared to a list, which has an order, a collection has no inherent ordering.
+	a collection is a generic.
+	essentially, it's a bag that holds stuff.
+
+
+
+what is an iterator?
+
+it allows you to go through the collection, even though the collection is not ordered.
+you create a specific iterator object on a particular collection, and that keeps track of where you are in the collection.
+	then it sends you to the "next" element; the system essentially works so that you don't get to the same thing twice.
+an iterator also usually has a remove method, so that you can remove stuff as you find it (if you want to).
+you can have multiple iterators on the same collection.
+
+
+Iterable<AnyType> is an interface that insists that you have a method called Iterator.
+	this is in line 9. this iterator's
+	the iterator returns an object of the class that also has the Iterator interface, which includes those 3 methods previously talked about.
+
+
+java.util is a package that contains the method Iterator.
+
+---------------------
+
+
+
+
+
+
+
+
+**java.lang is the package that contains most of the main stuff of Java, like string, int, System.out, etc.
+
+
+
+
+
+
+
+
+
+-- list.java --
+all lists must also be a collection. (covered by the "extends" in line 1)
+the list iterator uses a position, because you can go forwards and backwards due to the ordering.
+	in a collection, you can only go "forward" because there is no ordering.
+---------------
+
+
+
+
+
+
+
+
+
+
+ArrayList is a concrete class in Java (part of java.util) that implements the List interface.
+	this means that it contains all of the methods that List provides.	
+
+what instance variables does an ArrayList need?
+	it needs an initial size, an array, 
+
+
+
+
+
+
+
+
+
+
+
+
+
+Linked list
+2 kinds:
+	singly linked list
+		we don't want ourselves in the situation where we are pre-allocating extra space.
+		within this singly linked list data structure, we define a class called a node.
+			we build a singly linked list out of a node
+
+		a node holds two fields: the data and the next pointer. the next pointer is a reference to another linked list node.
+		effectively, the linked list points to the next element in the linked list.
+		
+		the very last node in the linked list points to null.
+
+
+		if you are given the reference to the first node, you should be able to get to every other node in the list.
+		the nice thing about this is you are no longer forced to store data in continugous locations in memory.
+
+
+
+		CONSEQUENCES:
+		to add something to the end of the list, you have to go through the whole list and point the last node to the new node.
+			this is of order n.
+		to add something to the front of the list, you save much more computation.
+			this is of order 1.
+		to add to the middle of the list,
+			this is of order 1, with the caveat that you must find the reference to the node after/before which you want to add the new node.
+			once you find this reference, this is of order 1.
+
+
+		e.g. a singly linked list is perfect to make a stack, in which you only add/remove from one end.
+			because operations at the front of the linked list are of order 1, this is perfect.
+
+
+
+
+
+	doubly linked list
+		(java's linked lists are doubly linked lists)
+
+		each node has data, and BOTH a previous and next pointer.
+		
+		now adding and removing at either end becomes of order 1.
+
+		one way of implementing doubly linked lists is to use sentinel nodes.
+			sentinel nodes have no data. these are usually used as the first and last nodes of a doubly linked list.
+			a doubly linked list of size 0 has 2 nodes: head and tail nodes.
+
+				the head's previous points to null, and next points to tail node.
+				the tail's previous points to head node, and next points to null.
+
+		if you want to insert something at the front of the list, you insert it after the head node.
+
+		
+		let's say you have a pointer k that points to some node in a doubly linked list.
+		let's also say you have a new node t that you want to insert.
+		to insert t after the node that k poins
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+HW: Read chapters 1-2, and start 3.
+	also read big java. you need to catch up.

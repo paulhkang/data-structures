@@ -1,0 +1,23 @@
+Chapter 9
+
+FINAL: Dykstra's algorithm
+
+
+
+
+Kruskal's code:
+
+big-o cost:
+	Assume that union is order 1.
+	Outer loop is O(e).
+	pq.deleteMin() is O(log e).
+
+	therefore big-o cost is O(e log e).
+
+
+
+
+
+
+
+NP-completeness

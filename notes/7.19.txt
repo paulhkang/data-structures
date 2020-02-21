@@ -1,0 +1,139 @@
+AVL trees
+
+know how to check a tree for whether it (and its subtrees) are AVL
+know how to insert an element into the tree
+know how to check whether a double or single rotation is necessary
+know how to execute a single or double rotation
+	whenever you have a rotation scenario, you are looking at the 2 steps below you
+
+	zig-zig --> single rotation (rotateWithLeftChild()) OR RightChild
+	zig-zag --> double rotation (doubleWithLeftChild()) OR RightChild
+
+
+in an AVL tree, the insert and remove methods can potentially introduce an imbalance into the tree;
+	these are the only 2 methods that change from a binary search tree to an AVL tree
+
+
+
+
+
+
+
+
+
+CHAPTER 5
+Hashes
+
+Sets
+
+Related to sets are maps
+	in a map, you have key-valued pairs (key is a unique identifier)
+		some underlying data structure, a set of keys
+		values are assigned to those keys
+
+	in java, there's a data type called map (it's actually an interface, look it up in the api)
+
+
+
+what is a hash table?
+	--> what is a hash value?
+		you take some sort of piece of data, and you apply some mathematical function to that data, which gives you a certain value
+		the hope is that the value that the hash gives you is relatively unique to the data
+
+
+
+
+
+What is separate chaining??
+
+-- end of test material (through separate chaining) --
+
+
+
+
+HOMEWORK 3: LOOK UP WHAT CODIO IS (its a differentIDE)
+
+
+
+
+
+
+TEST:
+5:30PM on monday
+ends at 7PM
+
+
+closed book, closed note, no calc/computers
+
+
+
+6 or 7 problems
+	7th question - hash table (may be tricky)
+	rest should be straightforward
+
+	induction on a tree
+	convert list of ordered numbers into an AVL tree, inserting one element add a time
+
+
+
+	textbooks sections:
+		chapter 1: skim, 
+		chapter 2: in its entirety
+		chapter 3: in its entirety
+		chapter 4: through chapter 4.4, read chapter 4.6, skim through maps and sets
+		chapter 5: through chapter 5.3
+				
+			through means including
+
+
+
+
+	
+	IN-DEPTH:
+		tower of hanoi, nested class vs inner class
+		chapter 2: what is big-Oh for asymptotic running times?
+			   definition for big-Oh, big-Th, big-Om?
+				worst case, best case, average case analyses
+		chapter 3: list ADT, typical list operations, arrayLists, running times for inserts, removes, etc.
+									how to deal with things when you run out of space in the array
+			  both singly and doubly linked lists, running times for linkedlist methods, sentinel nodes
+			   ** adding and removing elements from a linkedlist
+			   be familar with iterators
+			   stack ADT, typical stack operations, various ways of implementing stacks: (fixedlength arrays, arraylists, linkedlists)
+				variety of stack applications:  balancing symbols, reversing list, checking for palindromes, evaluate postfix expression
+								build expression tree
+			   queue ADT, typical queue operations, (try to avoid using singly linked lists for queue bc of running time)
+		chapter 4: generalized trees, representations (first child, next sibling)
+				tree traversals
+				binary trees, how to code them (what does a typical binary node look like?)
+				express an algorithm for building an expression tree from a postfix expression
+					**if you were given the in-order traversal of a tree, and a post-order traversal of a tree, could you give the orig tree? YES! know how to do this
+				binary search trees, the methods on binary search trees and their run times, distinction between balanced and arbitrary BST, most operations on an arbitrary BST are O(N).
+					write methods on BSTs, recursive or iterative
+					full remove, lazy deletion
+					AVL tree condition, rotations
+					difference between full binary tree, complete binary tree, perfect binary tree
+		chatper 5: what is hashing, hash function, issues with collisions (separate chaining), load factor, re-hashing if the load factor gets too high
+
+
+
+
+
+
+
+how do you do something from homework 1????										V
+	recursion from problem 2? how do you do it with a base case?
+	ask about the public driver vs private helper in your problem2 code, it seems useless and dumb
+	deriving O(logN) relations (check notes for binary search analysis)						V
+
+
+		
+
+test/solutions will be posted on courseworks
+
+lecture starts 7:10
+
+
+
+
+

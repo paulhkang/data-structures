@@ -1,0 +1,113 @@
+-- MyArrayList.java --
+it's a generic (<AnyType>)
+
+
+
+doClear()
+	sets theSize to 0,
+	ensures that the array has enough capacity to fit DEFAULT_CAPACITY
+
+
+
+ensureCapacity(int newCapacity)
+	if capacity fits, then simply return
+
+	if not, create array "old", as a copy of "theItems"
+	set the original "theItems" equal to a new object array of size newCapacity, then cast the type into AnyType
+		you have to cast, because you can't create an array of AnyType; you have to create an array of objects, then cast it
+	then it copies all the old stuff to theItems
+
+
+isEmpty()
+	returns 0 if array is empty
+
+
+
+get(int idx)
+	returns a particular element in the array
+
+
+
+
+add(AnyType x)
+	calls the overloaded add() method, which adds the value to the end of the array
+
+add(int idx, AnyType x)
+	uses ensureCapacity to reallocate array size to ensure that the array will fit the new value
+	
+	for loop starts at theSize, and moves backwards until you are one past the location that you want to insert the value
+		shifts everything towards the end
+	then it puts the new value in at the idx, and increments theSize
+
+
+
+
+
+toString()
+	StringBuilder
+		when using the + operator to concatenate strings, you create a new string with each + operator, creating a shitload of useless strings in memory
+		StringBuilder lets you avoid this
+
+
+	we're having it iterate across itself; "this" is the implicit argument for the current element
+		this is an enhanced for loop, which automatically iterates throughout the collection. (look up enhanced for loops for more info)
+
+
+
+
+
+
+
+
+class ArrayListIterator
+	this is a NESTED CLASS!
+
+	nested class
+		a class that's defined inside of another class
+		ArrayListIterator is defined inside of the MyArrayList class
+
+		2 kinds of nested classes: static and non-static
+			static has the static keyword, non-static has no static keyword
+
+			a non-static nested class is called an inner class.
+				if you are an inner class, you are granted access to the instance variables of the outer class.
+				instances of ArrayListIterator have access to the instance variables of MyArrayList.
+					e.g. theItems, theSize
+
+
+			a non-static METHOD of MyArrayList is attached to a specific MyArrayList
+
+
+	hasNext() checks if the current location is smaller than the size of the MyArrayList(?)
+		size() is coming from the outer class
+
+
+
+	**++ operator
+		if ++ is put after the variable (i++), does the statement, THEN increments by 1
+		if ++ is put before the variable (++i), increments, THEN does the statement
+
+
+
+	remove()
+		MyArrayList.this.remove( --current );
+			MyArrayList.this is a notation that means the outer object. MyArrayList.this.remove is the remove() method from the outer MyArrayList class.
+			there's 2 remove methods: one in both the inner and outer classes.
+			after removing the current, then set okToRemove to false.
+
+			remove() removes the value "behind" your current location; you must move past the element to be removed before you can remove it.
+
+
+
+	implements Iterator on AnyType
+
+
+
+
+
+
+
+
+
+**GO THROUGH MyLinkedList**
+	these 2 files are on Weiss's site. check the textbook.

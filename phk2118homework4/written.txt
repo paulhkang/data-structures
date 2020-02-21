@@ -1,0 +1,105 @@
+3. Weiss, 6.2
+a.
+
+0	1	2	3	4	5	6	7	8	9	10	11	12	13	14	15
+
+x	10
+x	10	12
+x	1	12	10
+x	1	12	10	14
+x	1	6	10	14	12
+x	1	6	5	14	12	10
+x	1	6	5	14	12	10	8
+x	1	6	5	14	12	10	8	15
+x	1	3	5	6	12	10	8	15	14
+x	1	3	5	6	9	10	8	15	14	12
+x	1	3	5	6	7	10	8	15	14	12	9
+x	1	3	4	6	7	5	8	15	14	12	9	10
+x	1	3	4	6	7	5	8	15	14	12	9	10	11
+x	1	3	4	6	7	5	8	15	14	12	9	10	11	13
+x	1	3	2	6	7	5	4	15	14	12	9	10	11	13	8
+
+
+
+
+b.
+
+0	1	2	3	4	5	6	7	8	9	10	11	12	13	14	15
+
+x	1	3	2	12	6	4	8	15	14	9	7	5	11	13	10
+
+
+
+
+ 
+4. Weiss, 6.8
+a.
+
+In a min-heap, if the maximum item was at a non-leaf node, it would have a child whose value is lesser. This violates the min-heap heap-order property.
+Therefore, the maximum item must be at a leaf.
+
+
+b.
+
+Any time you add a node to a binary heap, you create a leaf. Simultaneously, you might also "remove" a leaf, if the new node is a child of what was a leaf.
+Let N = # of nodes, and L = number of leaves. When you increment N, you only increment L if the new node's parent already has another child. 
+If the new node's parent was a leaf before you created the new node (i.e. had no children), then the number of leaves stays constant.
+Thus, L is only incremented in every other increment of N.
+An empty tree contains 0 leaves, and a 1-node tree contains 1 leaf. Extrapolating from this results in L being exactly ceiling(N/2).
+
+(This can probably be more rigorously proved with induction.)
+
+
+c.
+
+For any given node with 2 children, the ordering of the children is arbitrary. The left child could be greater than the right child, and vice versa.
+One cannot be sure that one has found the maximum item in the heap until one has checked the left and right child of every node.
+Therefore, every leaf must be examined to find it.
+
+
+
+
+
+5. Weiss, 7.19
+
+{3 1 4 1 5 9 2 6 5 3 5}
+{3 1 4 1 5 9 2 6 5 3 5}		// 5 is chosen as pivot from 3, 9, 5
+{3 1 4 1 3 9 2 6 5 5 5}
+{3 1 4 1 3 5 2 5 9 5 6}
+
+{3 1 4 1 3 5 2} {5} {9 5 6}
+sort {3 1 4 1 3 6 2}; {5} and {9 5 6} are at or below cutoff of 3.
+
+{3 1 4 1 3 5 2}
+{3 1 4 1 3 5 2}			// 2 is chosen as pivot from 3, 1, 2
+{1 1 4 3 3 5 2}
+{1 1 2 3 3 5 4}
+
+{1 1} {2} {3 3 5 4}
+sort {3 3 5 4}; {1 1} and {2} are at or below cutoff of 3.
+
+{3 3 5 4}
+{3 3 5 4}			// 4 is chosen as pivot from 3, 5, 4
+{3 3 4 5}
+
+{3 3} {4} {5}
+
+
+now, all arrays are at or below cutoff of 3. sort these arrays, and concatenate in proper order.
+
+{1 1} + {2} + {3 3} + {4} + {5} + {5} + {5 6 9}
+= {1 1 2 3 3 4 5 5 5 6 9}
+
+
+
+
+
+
+6. Weiss, 7.28
+a.
+
+Give an algorithm that performs a three-way in-place partition of an N-element subarray using only N-1 three-way comparisons.
+If there are d items equal to the pivot, you may use d additional Comparable swaps, above and beyond the two-way partitioning algorithm. 
+(hint in book)
+
+

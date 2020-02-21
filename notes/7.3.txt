@@ -1,0 +1,111 @@
+four rules of recursion:
+
+
+
+1) define a base case
+
+2) make progress towards the base case
+
+3) design rule: write recursion assuming that the recursive calls work
+4) compound interest: don't repeat work. if you repeat work, you accumulate more and more redundant work.
+
+
+
+in fibonacci, you want to create an array to keep track of all of the previous fibonacci calculations.
+	-- memoization (helps on fourth rule)
+	dynamic programming is when you phrase a problem as a recursion, and then memoize it.
+
+
+
+
+
+
+
+
+tower of hanoi
+	3 pegs: start, middle, end (goal)
+	# of disks on starting peg, stacked in decreasing size
+	move one disk at a time, using middle disk as temporary space
+	
+	strategy: move the n-1 disks on top of the biggest one to the temp, then move the biggest to the goal
+		then do that shit again until ur done
+
+
+
+
+
+
+check online to find the tower of hanoi code.
+
+
+
+
+
+
+there are 2 types of generics we'll work with.
+class generics vs. method generics
+
+class generics
+define the generic at the top of the class, then use it throughout the code
+
+method generics
+you don't have a whole class defined with the generic.
+so, you define a generic for a particular method.
+
+
+
+
+
+
+
+generics give us an extra bit of power. in addition to specifying what class we wrap around/work on, generics also give us the ability to
+	bound what type we can put there.
+
+
+
+
+
+COMPARABLE:
+	an interface that classes can implement
+	** an interface provides a list of methods that need to be implemented.
+	this means that if you implement an interface, you have to provide a certain method that's defined by that interface
+	
+	in comparable, you must define a method called compareTo, to compare shit. (it is not built-in)
+		this method compares two input objects of the same type(?), passing a negative, positive, or 0.
+
+
+-- Person.java --
+define a class "Person".
+this class implements an interface called "Comparable", which is a generic. It implements "Comparable" on itself.
+
+reads in, and sets variables for, first and last names.
+
+we create a compareTo method. this method returns an int, and takes in an object that MUST BE of the same class(?) as the other object.
+
+	the string class already implements comparable.												(1)
+
+
+
+
+
+
+-- BinarySearchGenerics.java --
+l9	what is "extends"?
+		you can put anything in there, but whatever you put in there must also implement Comparable on itself.
+l10	if you call binarySearch(), java will infer the type of the objects based on the actual inputted types. (note the 2 inputs must be of the same type)
+while	this loop keeps going as long as low <= high, because when low > high, you have an empty array and you stop.
+	a[] is an array of things that are known to implement Comparable.
+l27	if we go through the whole loop without finding it, we return -1.
+
+you can make this while loop into a recursive method.
+if you also have it take in the low and high, then have it recursively read back the low and high into itself.
+	**NOTE: the first method is not recursive, but the second,third,... are recursive.	-- "recursive driver method"
+
+	in a recursive driver method: typically, the driver method is public. and the recursive method is private.
+
+
+
+
+questions:
+	in hanoi, you defined count variable after the if statement. why does that work?
+	(1)
